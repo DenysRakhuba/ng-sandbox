@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-outline-info" [disabled]="!recipeForm.valid">Save</button>
+                <button type="button" class="btn btn-outline-warning"
+                (click)="onCancel()">Cancel</button>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" 
+                  id="name"
+                  formControlName="name" 
+                  class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="imagePath">Image URL</label>
+                  <input type="text" 
+                  formControlName="imagePath"
+                  id="imagePath" 
+                  class="form-control"
+                  #imagePath>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <img [src]="imagePath.value" alt="" class="img-fluid">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12"> 
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="text"
+                    formControlName="description"
+                    id="description" 
+                    class="form-control"
+                    rows="6"></textarea>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12" formArrayName="ingredients">
+                <div class="row" 
+                *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls; let i = index"
+                [formGroupName]="i">
+                  <div class="col-md-7">
+                   <div class="form-group">
+                      <input type="text" 
+                    class="form-control"
+                    formControlName="name">
+                   </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                      <input type="number" 
+                      class="form-control"
+                      formControlName="amount">
+                     </div>
+                    </div>
+                  <div class="col-md-2">
+                    <button type="button" 
+                    class="btn btn-outline-danger"
+                    (click)="onDeleteIngredient(i)">X</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-outline-info" 
+                    type="button"
+                    (click)="onAddIngredient()">Add Ingredient</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>

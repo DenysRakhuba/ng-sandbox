@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-outline-info" (click)="onNewRecipe()">New Recipe</button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <app-recipe-item 
+            *ngFor="let recipeItem of recipes; let i = index"
+            [recipe]="recipeItem"
+            [index]="i"></app-recipe-item>
+        </div>
+    </div>
+</div>
